@@ -3,10 +3,10 @@ import java.util.regex.Pattern;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        String cadena = "[a-z]{5,10}[0-9]*@(ups.edu.ec|est.ups.edu.ec)";
+        String cadena = "^[a-z]{5,10}\\d*@(ups.edu.ec|est.ups.edu.ec)";
         Pattern patron = Pattern.compile(cadena);
 
-        String ejemplo = "gpizarro1@est.ups.edu.ec";
+        String ejemplo = "1gpizarro1@est.ups.edu.ec";
         Matcher verificador = patron.matcher(ejemplo);
 
         while(verificador.find()) {
