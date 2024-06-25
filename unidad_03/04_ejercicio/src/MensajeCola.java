@@ -8,7 +8,7 @@ public class MensajeCola<E> implements Canal<E> {
         this.cola = new Vector<E>();
     }
 
-    @Override
+    @Override   
     public void enviar(E elemento) {
         this.cola.addElement(elemento);
     }

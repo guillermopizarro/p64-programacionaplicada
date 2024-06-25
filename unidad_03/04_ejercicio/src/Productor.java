@@ -2,9 +2,9 @@ import java.util.*;
 
 public class Productor implements Runnable {
 
-    private Channel<Date> cola;
+    private Canal<Date> cola;
 
-    public Productor(Channel<Date> cola) {
+    public Productor(Canal<Date> cola) {
         this.cola = cola;
     }
 
@@ -15,7 +15,7 @@ public class Productor implements Runnable {
         while (true) {
             mensaje = new Date();
             System.out.println("Productor: " + mensaje);
-            this.cola.send(mensaje);
+            this.cola.enviar(mensaje);
         }
     }
     
