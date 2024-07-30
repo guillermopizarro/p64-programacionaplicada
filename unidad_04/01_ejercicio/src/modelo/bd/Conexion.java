@@ -70,6 +70,12 @@ public class Conexion {
     }
 
     public String urlConexion() {
-        return this.driver + "://" + this.host + ":" + this.puerto + "/" + this.nombre;
+        String url = "";
+        if (this.driver.equals("jdbc:sqlserver")) {
+            url = this.driver + "://" + this.host + ":" + this.puerto + ";databaseName=" + this.nombre + ";encrypt=true;trustServerCertificate=true";
+        } else {
+            url = this.driver + "://" + this.host + ":" + this.puerto + "/" + this.nombre;
+        }
+        return url;
     }
 }

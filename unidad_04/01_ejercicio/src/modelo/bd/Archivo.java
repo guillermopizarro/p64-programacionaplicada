@@ -21,6 +21,7 @@ public class Archivo {
             Properties prop = new Properties();
             String ruta = System.getProperty("user.dir");
             this.archivo = new FileInputStream(ruta+"\\resources\\"+this.nombreArchivo);
+            //this.archivo = getClass().getClassLoader().getResourceAsStream(this.nombreArchivo);
             if (this.archivo != null) {
                 prop.load(this.archivo);
 
@@ -46,5 +47,10 @@ public class Archivo {
 
     public void setConexion(Conexion conexion) {
         this.conexion = conexion;
+    }
+
+    public static void main(String[] args) {
+        Archivo archivo = new Archivo();
+        archivo.leerArchivo();
     }
 }
