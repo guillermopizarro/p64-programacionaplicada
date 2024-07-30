@@ -21,7 +21,7 @@ public class BD {
             this.con = DriverManager.getConnection( this.archivo.getConexion().urlConexion(), 
                 this.archivo.getConexion().getUsuario(), 
                 this.archivo.getConexion().getClave() );
-            System.out.println( "[db] - Conexion exitosa." );
+            System.out.println( "[db] - Conexion exitosa. -- " + this.archivo.getConexion().getDriver() );
         } catch (ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
