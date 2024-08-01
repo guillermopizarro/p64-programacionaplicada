@@ -10,9 +10,20 @@ public class Conexion {
     private String nombre;
 
     public Conexion() {
-
     }
 
+    public String urlConexion() {
+        String url = "";
+        if (this.driver.equals("jdbc:sqlserver")) {
+            url = this.driver + "://" + this.host + ":" + this.puerto + ";databaseName=" + this.nombre + 
+                ";encrypt=true;trustServerCertificate=true";
+        } else {
+            url = this.driver + "://" + this.host + ":" + this.puerto + "/" + this.nombre;
+        }
+        return url;
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">     
     public String getClave() {
         return clave;
     }
@@ -68,14 +79,5 @@ public class Conexion {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-
-    public String urlConexion() {
-        String url = "";
-        if (this.driver.equals("jdbc:sqlserver")) {
-            url = this.driver + "://" + this.host + ":" + this.puerto + ";databaseName=" + this.nombre + ";encrypt=true;trustServerCertificate=true";
-        } else {
-            url = this.driver + "://" + this.host + ":" + this.puerto + "/" + this.nombre;
-        }
-        return url;
-    }
+    // </editor-fold>
 }
