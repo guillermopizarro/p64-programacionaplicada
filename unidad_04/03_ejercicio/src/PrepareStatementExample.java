@@ -29,8 +29,8 @@ public class PrepareStatementExample {
         
         try {
             this.preparedStatement = this.connection.prepareStatement(sql);
-            this.preparedStatement.setString(1, "John Doe");
-            this.preparedStatement.setString(2, "john.doe@example.com");
+            this.preparedStatement.setString(1, "Guillermo Pizarro");
+            this.preparedStatement.setString(2, "gpizarro@ups.edu.ec");
             
             int rowsAffected = this.preparedStatement.executeUpdate();
             System.out.println("Rows affected: " + rowsAffected);

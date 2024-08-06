@@ -5,7 +5,7 @@ public class App {
         PersonaBeanDAO personaDAO = new PersonaBeanDAO();
 
         // Insertar una nueva persona
-        PersonaBean persona = new PersonaBean("1234567821", "Luis", "Alvarez");
+        PersonaBean persona = new PersonaBean("1234567123", "Luis", "Alvarez");
         personaDAO.insertarPersona(persona);
 
         // Obtener y mostrar las personas

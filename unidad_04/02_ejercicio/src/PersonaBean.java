@@ -40,5 +40,3 @@ public class PersonaBean implements Serializable {
         this.apellido = apellido;
     }
 }
-
-x|
