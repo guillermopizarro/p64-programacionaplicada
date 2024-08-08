@@ -15,7 +15,7 @@ public class Archivo {
         this.nombreArchivo = "bd.properties";
         this.conexion = new Conexion();
     }
-
+    
     public void leerArchivo() {
         try {
             Properties prop = new Properties();
