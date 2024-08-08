@@ -1,4 +1,4 @@
-package modelo.bd;
+package modelo;
 
 public class Conexion {
     private String driverClass;

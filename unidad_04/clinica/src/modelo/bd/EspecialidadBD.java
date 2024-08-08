@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.BD;
 import modelo.dominio.Especialidad;
 
 /**
