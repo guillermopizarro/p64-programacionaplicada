@@ -79,7 +79,15 @@ public class BD {
     public void setRs(ResultSet rs) {
         this.rs = rs;
     }
-    
+
+    public Connection getCon() {
+        return con;
+    }
+
+    public void setCon(Connection con) {
+        this.con = con;
+    }
+  
     public static void main(String[] args) {
         BD bd = new BD();
         bd.conectar();
