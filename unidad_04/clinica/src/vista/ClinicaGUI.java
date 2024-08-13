@@ -4,6 +4,8 @@
  */
 package vista;
 
+import modelo.dominio.Usuario;
+
 /**
  *
  * @author guill
@@ -17,7 +19,7 @@ public class ClinicaGUI extends javax.swing.JFrame {
         initComponents();
         
         setLocationRelativeTo(null);
-        //setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
@@ -39,7 +41,7 @@ public class ClinicaGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Sistema Informático de la Clínica");
 
         jLabel2.setText("Usuario:");
@@ -82,16 +84,16 @@ public class ClinicaGUI extends javax.swing.JFrame {
                             .addComponent(usuarioTxt)
                             .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
+                        .addGap(45, 45, 45)
                         .addComponent(jLabel1)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(usuarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -114,6 +116,9 @@ public class ClinicaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarBtnActionPerformed
 
     private void autenticarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autenticarBtnActionPerformed
+        Usuario usuario = new Usuario();
+        usuario.setUsuario( this.usuarioTxt.getText() );
+        usuario.setClave( this.usuarioTxt.getText() );
         
     }//GEN-LAST:event_autenticarBtnActionPerformed
 

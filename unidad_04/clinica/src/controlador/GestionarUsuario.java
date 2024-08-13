@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package modelo.bd;
+package controlador;
 
 import java.util.ArrayList;
 import modelo.dominio.Usuario;
@@ -11,8 +11,22 @@ import modelo.dominio.Usuario;
  *
  * @author guill
  */
-public class UsuarioBD extends Usuario implements ObjetoBD {
+public class GestionarUsuario implements GestionarObjeto {
+    
+    private Usuario usuario;
+    
+    public GestionarUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    public GestionarUsuario() {
+        
+    }
 
+    public boolean autenticarUsuario() {
+        return false;
+    }
+    
     @Override
     public void registrar(Object objeto) {
     }
@@ -34,5 +48,4 @@ public class UsuarioBD extends Usuario implements ObjetoBD {
     public ArrayList<Object> listar() {
         return null;
     }
-    
 }
