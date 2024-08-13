@@ -1,1 +1,11 @@
-/unidad_04/clinica/dist/
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.tar.gz
+*.rar

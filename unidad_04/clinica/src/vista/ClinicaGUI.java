@@ -119,8 +119,10 @@ public class ClinicaGUI extends javax.swing.JFrame {
             Usuario usuario = new Usuario();
             usuario.setUsuario( usuarioTxt.getText() );
             usuario.setClave( new String(passwordTxt.getPassword()) );
+            
             GestionarUsuario gestionar_usuario = new GestionarUsuario(usuario);
-            usuario = gestionar_usuario.autenticarUsuario();            
+            usuario = gestionar_usuario.autenticarUsuario();
+            
             if (usuario != null) {
                 MenuPrincipal menu = new MenuPrincipal();
                 menu.setVisible(true);
@@ -134,7 +136,7 @@ public class ClinicaGUI extends javax.swing.JFrame {
                                              JOptionPane.WARNING_MESSAGE,
                                              null,
                                              options,
-                                             options[0]);        
+                                             options[0]);
             }
         } else {
                 Object[] options = {"Cerrar"};
