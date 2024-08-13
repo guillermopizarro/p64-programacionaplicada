@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista;
 
+import controlador.GestionarUsuario;
+import javax.swing.JOptionPane;
 import modelo.dominio.Usuario;
+import vista.MenuPrincipal;
 
 /**
  *
@@ -116,10 +115,38 @@ public class ClinicaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarBtnActionPerformed
 
     private void autenticarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autenticarBtnActionPerformed
-        Usuario usuario = new Usuario();
-        usuario.setUsuario( this.usuarioTxt.getText() );
-        usuario.setClave( this.usuarioTxt.getText() );
-        
+        if (!usuarioTxt.getText().trim().equals("") && !passwordTxt.getText().trim().equals("")) {
+            Usuario usuario = new Usuario();
+            usuario.setUsuario( usuarioTxt.getText() );
+            usuario.setClave( new String(passwordTxt.getPassword()) );
+            GestionarUsuario gestionar_usuario = new GestionarUsuario(usuario);
+            usuario = gestionar_usuario.autenticarUsuario();            
+            if (usuario != null) {
+                MenuPrincipal menu = new MenuPrincipal();
+                menu.setVisible(true);
+                this.setVisible(false);
+            } else {
+                Object[] options = {"Cerrar"};
+                JOptionPane.showOptionDialog(null,
+                                             "El usuario o la clave son incorrectas.",
+                                             "Advertencia",
+                                             JOptionPane.DEFAULT_OPTION,
+                                             JOptionPane.WARNING_MESSAGE,
+                                             null,
+                                             options,
+                                             options[0]);        
+            }
+        } else {
+                Object[] options = {"Cerrar"};
+                JOptionPane.showOptionDialog(null,
+                                             "El usuario o la clave no han sido ingresadas.",
+                                             "Advertencia",
+                                             JOptionPane.DEFAULT_OPTION,
+                                             JOptionPane.WARNING_MESSAGE,
+                                             null,
+                                             options,
+                                             options[0]);            
+        }
     }//GEN-LAST:event_autenticarBtnActionPerformed
 
     /**

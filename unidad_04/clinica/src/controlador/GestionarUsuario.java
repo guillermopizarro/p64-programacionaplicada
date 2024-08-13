@@ -5,6 +5,7 @@
 package controlador;
 
 import java.util.ArrayList;
+import modelo.bd.UsuarioBD;
 import modelo.dominio.Usuario;
 
 /**
@@ -13,18 +14,20 @@ import modelo.dominio.Usuario;
  */
 public class GestionarUsuario implements GestionarObjeto {
     
-    private Usuario usuario;
+    private UsuarioBD usuario;
     
     public GestionarUsuario(Usuario usuario) {
-        this.usuario = usuario;
+        this.usuario = new UsuarioBD();
+        this.usuario.setUsuario(usuario.getUsuario());
+        this.usuario.setClave(usuario.getClave());
     }
     
     public GestionarUsuario() {
         
     }
 
-    public boolean autenticarUsuario() {
-        return false;
+    public Usuario autenticarUsuario() {
+        return this.usuario.autenticar();
     }
     
     @Override
