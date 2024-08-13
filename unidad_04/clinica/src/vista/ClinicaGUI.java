@@ -11,12 +11,14 @@ import vista.MenuPrincipal;
  */
 public class ClinicaGUI extends javax.swing.JFrame {
 
+    private GestionarUsuario gestionar;
     /**
      * Creates new form ClinicaGUI
      */
     public ClinicaGUI() {
         initComponents();
         
+        this.gestionar = new GestionarUsuario();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -53,11 +55,21 @@ public class ClinicaGUI extends javax.swing.JFrame {
                 autenticarBtnActionPerformed(evt);
             }
         });
+        autenticarBtn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                autenticarBtnKeyPressed(evt);
+            }
+        });
 
         cancelarBtn.setText("Cancelar");
         cancelarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarBtnActionPerformed(evt);
+            }
+        });
+        cancelarBtn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cancelarBtnKeyPressed(evt);
             }
         });
 
@@ -113,43 +125,22 @@ public class ClinicaGUI extends javax.swing.JFrame {
     private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
         dispose();
     }//GEN-LAST:event_cancelarBtnActionPerformed
-
+    
     private void autenticarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autenticarBtnActionPerformed
-        if (!usuarioTxt.getText().trim().equals("") && !passwordTxt.getText().trim().equals("")) {
-            Usuario usuario = new Usuario();
-            usuario.setUsuario( usuarioTxt.getText() );
-            usuario.setClave( new String(passwordTxt.getPassword()) );
-            
-            GestionarUsuario gestionar_usuario = new GestionarUsuario(usuario);
-            usuario = gestionar_usuario.autenticarUsuario();
-            
-            if (usuario != null) {
-                MenuPrincipal menu = new MenuPrincipal();
-                menu.setVisible(true);
-                this.setVisible(false);
-            } else {
-                Object[] options = {"Cerrar"};
-                JOptionPane.showOptionDialog(null,
-                                             "El usuario o la clave son incorrectas.",
-                                             "Advertencia",
-                                             JOptionPane.DEFAULT_OPTION,
-                                             JOptionPane.WARNING_MESSAGE,
-                                             null,
-                                             options,
-                                             options[0]);
-            }
-        } else {
-                Object[] options = {"Cerrar"};
-                JOptionPane.showOptionDialog(null,
-                                             "El usuario o la clave no han sido ingresadas.",
-                                             "Advertencia",
-                                             JOptionPane.DEFAULT_OPTION,
-                                             JOptionPane.WARNING_MESSAGE,
-                                             null,
-                                             options,
-                                             options[0]);            
-        }
+        this.gestionar.autenticarUsuario(this, usuarioTxt, passwordTxt);
     }//GEN-LAST:event_autenticarBtnActionPerformed
+
+    private void autenticarBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_autenticarBtnKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            this.gestionar.autenticarUsuario(this, usuarioTxt, passwordTxt);
+        }
+    }//GEN-LAST:event_autenticarBtnKeyPressed
+
+    private void cancelarBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cancelarBtnKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            dispose();
+        }
+    }//GEN-LAST:event_cancelarBtnKeyPressed
 
     /**
      * @param args the command line arguments

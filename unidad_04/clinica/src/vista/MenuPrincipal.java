@@ -4,6 +4,7 @@
  */
 package vista;
 
+import modelo.dominio.Usuario;
 import vista.especialidad.EspecialidadGUI;
 
 /**
@@ -15,7 +16,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public MenuPrincipal(Usuario usuario_admin) {
         initComponents();
         
         setLocationRelativeTo(null);
