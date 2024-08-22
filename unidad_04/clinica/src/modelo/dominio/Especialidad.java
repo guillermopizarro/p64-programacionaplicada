@@ -4,6 +4,9 @@
  */
 package modelo.dominio;
 
+import java.util.Vector;
+import javax.swing.JButton;
+
 /**
  *
  * @author guill
@@ -30,6 +33,16 @@ public class Especialidad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Object[] getDatos() {
+        JButton modificarBtn = new JButton("Modificar");
+        modificarBtn.setName("M");
+        JButton eliminarBtn = new JButton("Eliminar");
+        eliminarBtn.setName("E");
+        
+        Object[] valores = { this.especialidad_id, this.nombre, modificarBtn, eliminarBtn };
+        return valores;
     }
     
     

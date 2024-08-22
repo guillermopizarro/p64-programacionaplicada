@@ -4,7 +4,12 @@
  */
 package vista.especialidad;
 
+import controlador.GestionarEspecialidad;
+import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import modelo.dominio.Especialidad;
 import vista.MenuPrincipal;
 
 /**
@@ -14,6 +19,11 @@ import vista.MenuPrincipal;
 public class EspecialidadGUI extends javax.swing.JFrame {
 
     private MenuPrincipal menu;
+    private DefaultTableModel modelo;
+    private EspecialidadTbl dataTbl;
+    
+    private GestionarEspecialidad gestionar;
+    
     /**
      * Creates new form EspecialidadGUI
      */
@@ -25,6 +35,23 @@ public class EspecialidadGUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
         this.setResizable(false);
+        
+        this.dataTbl = new EspecialidadTbl();
+        this.dataTbl.verTabla(this.especialidadesTbl);
+        
+        cargarDatos();
+    }
+    
+    public void cargarDatos() {
+        this.modelo = (DefaultTableModel) this.especialidadesTbl.getModel();
+        this.modelo.setRowCount(0);
+        
+        this.gestionar = new GestionarEspecialidad();
+        ArrayList<Object> especialidades = this.gestionar.listar();
+        for (Object especialidad : especialidades) {
+            System.out.println( ((Especialidad)especialidad).getNombre() );
+            this.modelo.addRow( ((Especialidad)especialidad).getDatos() );
+        }
     }
 
     /**
@@ -41,7 +68,7 @@ public class EspecialidadGUI extends javax.swing.JFrame {
         buscarTxt = new javax.swing.JTextField();
         buscarBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        especialidadesDt = new javax.swing.JTable();
+        especialidadesTbl = new javax.swing.JTable();
         agregarBtn = new javax.swing.JButton();
         cerrarBtn = new javax.swing.JButton();
 
@@ -61,18 +88,23 @@ public class EspecialidadGUI extends javax.swing.JFrame {
             }
         });
 
-        especialidadesDt.setModel(new javax.swing.table.DefaultTableModel(
+        especialidadesTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(especialidadesDt);
+        especialidadesTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                especialidadesTblMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(especialidadesTbl);
 
         agregarBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         agregarBtn.setText("Agregar");
@@ -142,7 +174,8 @@ public class EspecialidadGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarBtnActionPerformed
 
     private void agregarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBtnActionPerformed
-        // TODO add your handling code here:
+        EspecialidadVista ventana = new EspecialidadVista((DefaultTableModel) this.especialidadesTbl.getModel());
+        ventana.setVisible(true);
     }//GEN-LAST:event_agregarBtnActionPerformed
 
     private void cerrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarBtnActionPerformed
@@ -150,13 +183,36 @@ public class EspecialidadGUI extends javax.swing.JFrame {
         this.menu.setVisible(true);
     }//GEN-LAST:event_cerrarBtnActionPerformed
 
+    private void especialidadesTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_especialidadesTblMouseClicked
+        int columna = this.especialidadesTbl.getColumnModel().getColumnIndexAtX( evt.getX()) ;
+        int fila = evt.getY() / this.especialidadesTbl.getRowHeight();
+        
+        if (fila < this.especialidadesTbl.getRowCount() && fila >=0 && 
+                columna < this.especialidadesTbl.getColumnCount() && columna >=0) {
+            Object value = this.especialidadesTbl.getValueAt(fila, columna);
+            if (value instanceof JButton) {
+                ((JButton)value).doClick();
+                JButton boton = (JButton) value;
+                
+                Especialidad especialidad = new Especialidad();
+                especialidad.setEspecialidad_id( Integer.parseInt( this.especialidadesTbl.getValueAt(this.especialidadesTbl.getSelectedRow(), 0).toString() ) );
+                especialidad.setNombre( this.especialidadesTbl.getValueAt(this.especialidadesTbl.getSelectedRow(), 1).toString() );
+                
+                if (boton.getName().equals("M")) {
+                    EspecialidadVista gui = new EspecialidadVista( (DefaultTableModel) this.especialidadesTbl.getModel(), especialidad, boton.getName() );
+                    gui.setVisible(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_especialidadesTblMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarBtn;
     private javax.swing.JButton buscarBtn;
     private javax.swing.JTextField buscarTxt;
     private javax.swing.JButton cerrarBtn;
-    private javax.swing.JTable especialidadesDt;
+    private javax.swing.JTable especialidadesTbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
