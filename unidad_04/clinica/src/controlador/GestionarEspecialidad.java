@@ -31,12 +31,12 @@ public class GestionarEspecialidad implements GestionarObjeto {
 
     @Override
     public void eliminar(Object objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.especialidad.eliminar(objeto);
     }
 
     @Override
     public ArrayList<Object> buscar(Object objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.especialidad.buscar(objeto);
     }
 
     @Override

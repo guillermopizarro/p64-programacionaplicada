@@ -8,6 +8,7 @@ import controlador.GestionarEspecialidad;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.dominio.Especialidad;
 import vista.MenuPrincipal;
@@ -170,7 +171,14 @@ public class EspecialidadGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
-        // TODO add your handling code here:
+        Especialidad objeto = new Especialidad();
+        objeto.setNombre( this.buscarTxt.getText() );
+        this.modelo = (DefaultTableModel) this.especialidadesTbl.getModel();
+        this.modelo.setRowCount(0);
+        ArrayList<Object> especialidades = this.gestionar.buscar(objeto);
+        for (Object especialidad : especialidades) {
+            this.modelo.addRow( ((Especialidad)especialidad).getDatos() );
+        }
     }//GEN-LAST:event_buscarBtnActionPerformed
 
     private void agregarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBtnActionPerformed
@@ -201,6 +209,22 @@ public class EspecialidadGUI extends javax.swing.JFrame {
                 if (boton.getName().equals("M")) {
                     EspecialidadVista gui = new EspecialidadVista( (DefaultTableModel) this.especialidadesTbl.getModel(), especialidad, boton.getName() );
                     gui.setVisible(true);
+                } else if (boton.getName().equals("E")) {
+                    Object[] options = {"Si", "No"};
+                    int n = JOptionPane.showOptionDialog(this,
+                                "Esta seguro de eliminar el registro?",
+                                "Sistema de Registro",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE,
+                                null,     //do not use a custom Icon
+                                options,  //the titles of buttons
+                                options[1]); //default button title
+                    if (n == 0) {
+                        this.gestionar.eliminar( especialidad );
+                        
+                        DefaultTableModel modelo = (DefaultTableModel) this.especialidadesTbl.getModel();
+                        modelo.removeRow( fila );
+                    }
                 }
             }
         }
